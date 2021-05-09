@@ -11,13 +11,14 @@ Notes:
 (1) functions (add_months and per_change) feed into the main function tot_change
 (2) tot time on time change
 (3) tot_change assumes your periods are month end dates (last day of month)
-    can be altered in the for loop at line 105
+    can be altered in the for loop at line 100
 
 
 Changes:
 
 Name            Date            Version         Change
 Lee Rock        08/05/2021      v1.0.0          initial version
+Lee Rock        08/05/2021      v1.0.1          fixed typos
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 '''
@@ -41,13 +42,6 @@ import random
 
 ''' 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-import modules
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-'''
-
-
-''' 
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 sub functions - used in main function (tot_change)
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 '''
@@ -57,11 +51,11 @@ sub functions - used in main function (tot_change)
 def add_months(dte, increment):
    
    #dte = input date (date data type)
-    #increment the number of months to add/subtract from input date (int)
+   #increment = the number of months to add/subtract from input date (int)
 
       return dte + relativedelta(months = increment)
 
-#functionn to aclulate the percentage change with the old value as the denominator
+#functionn to calulate the percentage change with the old value as the denominator
 #if_zero used to assign a value to division by zero cases e.g 0, 123, 999 -1 etc
 def per_change(new_val, old_val, div_zero = 0, rounded = 2):
 
@@ -85,7 +79,7 @@ main function - for users to call
  
 #function to get the time on time change in a series
 #uses add_months and per_change functions created previously
-#this function assums period dates are monthly and are end of month
+#this function assumes period dates are monthly (last day of month)
 def tot_change(data, date_field, value_field, look_back_mth_num, div_zero = 0):
 
     #data = input dataset (object)
@@ -132,7 +126,6 @@ if __name__ == '__main__':
     val = [random.randint(5,500) for _ in range(len(date_range))]
     df = pd.DataFrame()
     df['PERIOD_DATE'] = date_range
-    #df['PERIOD_DATE'] = pd.to_datetime(df['PERIOD_DATE'])
     df['VAL'] = val
     df.sort_values(by=['PERIOD_DATE'], inplace=True )
 
